@@ -1,18 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import {  Text, View, ImageBackground } from 'react-native';
-import Styles from './styles/Styles';
+import Login from './screens/Login';
+import SignUp from './screens/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 export default function App() {
+{/* <StatusBar style="auto" /> */}
 
-  const localImage = require("./assets/background.jpg")
+const Stack = createNativeStackNavigator();
+ 
   return (
-    <ImageBackground style={Styles.container} source={localImage}>
-      <View style={Styles.backgroundCover}>
-        <Text style={Styles.lightText}>Login</Text>
-      </View>
-      <StatusBar style="auto" />
-    </ImageBackground>
+    <NavigationContainer>
+      <Stack.Navigator >
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+
+    </NavigationContainer>
+   
   );
 }
 ;
