@@ -2,7 +2,7 @@ import {  Text, TextInput, View, ImageBackground, Button, TouchableOpacity, Keyb
 import Styles from '../styles/Styles';
 import React, {useState} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
-
+import {auth} from '../firebaseConfig';
 
 
 export default function SignUp({navigation}) {
@@ -18,7 +18,23 @@ export default function SignUp({navigation}) {
     } else{
         setValidationMessage("");
     }
+
+    setValue(value);
   }
+
+  const handleSignUp = () => {
+    if (password === confirmPassword){
+    auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log(user.email);
+        })
+        .catch((error) => {
+            setValidationMessage(error.message)
+        })
+    }
+}
 
 
   const localImage = require("../assets/background.jpg")
@@ -26,18 +42,18 @@ export default function SignUp({navigation}) {
     <ImageBackground style={Styles.container} source={localImage}>
       <KeyboardAvoidingView style={Styles.backgroundCover} behaviour = {Platform.OS === "ios" ? "padding" : "height"}>
         <Text style={[Styles.lightText, Styles.header]}>Sign Up</Text>
-        <Text>{validationMessage}</Text>
+        <Text style={Styles.errorText}>{validationMessage}</Text>
 
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Email" value={email} onChangeText={setEmail} placeholderTextColor={'#ECECEC'}/>
-        <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Password" value={password} onChangeText={setPassword} placeholderTextColor={'#ECECEC'} secureTextEntry/>
-        <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} placeholderTextColor={'#ECECEC'} secureTextEntry/>
+        <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Password" value={password} onChangeText={(value)=>validateAndSet(value, confirmPassword, setPassword) } placeholderTextColor={'#ECECEC'} secureTextEntry/>
+        <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Confirm Password" value={confirmPassword} onChangeText={(value)=> validateAndSet(value, password, setConfirmPassword)} placeholderTextColor={'#ECECEC'} secureTextEntry/>
 
         <View style={Styles.rowContainer}>
           <Text style={Styles.lightText}>Already have an account?  </Text>
-          <InlineTextButton text="Login" onPress={()=> navigation.pop()}/>
+          <InlineTextButton text="Login" onPress={()=> navigation.navigate("Login")}/>
         </View>
 
-        <TouchableOpacity style={Styles.loginButton} >
+        <TouchableOpacity onPress={handleSignUp}style={Styles.loginButton} >
           <Text style={Styles.loginButtonText}>Sign Up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

@@ -1,8 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
+import ResetPassword from './screens/ResetPassword';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { initializeApp } from "firebase/app";
+
 
 
 export default function App() {
@@ -21,6 +24,11 @@ const Stack = createNativeStackNavigator();
          <Stack.Screen
           name="SignUp"
           component={SignUp}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="ResetPassword"
+          component={ResetPassword}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

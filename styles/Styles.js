@@ -27,6 +27,9 @@ export default StyleSheet.create({
       color:'white',
       fontSize:16,
     },
+    errorText:{
+      color:'red',
+    },
     header:{
       fontSize:32,
     },
