@@ -1,8 +1,9 @@
 import {  Text, TextInput, View, ImageBackground, Button, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native';
 import Styles from '../styles/Styles';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
 import {auth} from '../firebaseConfig';
+
 
 
 export default function SignUp({navigation}) {
@@ -11,6 +12,7 @@ export default function SignUp({navigation}) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  
 
   let validateAndSet = (value, valueToCompare, setValue) => {
     if (value !== valueToCompare){
@@ -22,19 +24,34 @@ export default function SignUp({navigation}) {
     setValue(value);
   }
 
+  useEffect (()=> {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+          if (user){
+              navigation.navigate("ToDo")
+          }
+      })
+      return unsubscribe
+  }, [])
+
   const handleSignUp = () => {
     if (password === confirmPassword){
-    auth
+      auth
         .createUserWithEmailAndPassword(email, password)
-        .then(userCredentials => {
-            const user = userCredentials.user;
-            console.log(user.email);
+        .then((userCredentials) => {
+          auth
+            .currentUser.sendEmailVerification()
+            .then(() => {
+              const user = userCredentials.user;
+            })
+            // const user = userCredentials.user;
+            
+            // console.log(user.email);
         })
         .catch((error) => {
-            setValidationMessage(error.message)
+            setValidationMessage(error.message);
         })
     }
-}
+  }
 
 
   const localImage = require("../assets/background.jpg")

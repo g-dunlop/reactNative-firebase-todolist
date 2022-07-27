@@ -2,12 +2,30 @@ import {  Text, TextInput, View, ImageBackground, Button, TouchableOpacity, Keyb
 import Styles from '../styles/Styles';
 import React, {useState} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
+import { auth } from '../firebaseConfig';
 
 
 
 export default function ResetPassword({navigation}) {
 
   const [email, setEmail] = useState("");
+  const[errorMessage, setErrorMessage] = useState("")
+
+  const resetPassword = () => {
+    auth
+    .sendPasswordResetEmail(email)
+    .then(() => {
+      navigation.navigate("Login")
+    // Password reset email sent!
+    // ..
+    })
+    .catch((error) => {
+      
+      setErrorMessage(error.message);
+      // ..
+    });
+  }
+
   
 
   const localImage = require("../assets/background.jpg")
@@ -15,6 +33,7 @@ export default function ResetPassword({navigation}) {
     <ImageBackground style={Styles.container} source={localImage}>
       <KeyboardAvoidingView style={Styles.backgroundCover} behaviour = {Platform.OS === "ios" ? "padding" : "height"}>
         <Text style={[Styles.lightText, Styles.header]}>Reset Password</Text>
+        <Text style={Styles.errorText}></Text>
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Email" value={email} onChangeText={(text)=> setEmail(text)} placeholderTextColor={'#ECECEC'}/>
         
        
@@ -22,7 +41,7 @@ export default function ResetPassword({navigation}) {
           <Text   style={Styles.lightText}>Don't have an account?  </Text>
           <InlineTextButton text="Sign Up" onPress={() => navigation.navigate("SignUp")}/>
         </View>
-        <TouchableOpacity style={Styles.loginButton} >
+        <TouchableOpacity style={Styles.loginButton} onPress={resetPassword}>
           <Text style={Styles.loginButtonText}>Reset Password</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

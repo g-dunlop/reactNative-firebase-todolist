@@ -60,6 +60,15 @@ export default StyleSheet.create({
     loginButtonText:{
       color:'yellow',
       fontSize:26,
-    }
+    },
+    logoutButton:{
+      padding:5,
+      borderRadius:10,
+     
+    },
+    logoutButtonText:{
+      color:'red',
+      fontSize:26,
+    },
     
 });
