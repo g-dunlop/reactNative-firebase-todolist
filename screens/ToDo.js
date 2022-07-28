@@ -102,6 +102,22 @@ export default function ToDo({navigation}){
         }
     }, [toDos])
     
+    let checkToDoItem = (id, item, isChecked) => {
+        const toDoRef = db.collection("todos").doc(id)
+        return toDoRef.update({
+            completed:!item.completed
+        })
+        .then(() => {
+            console.log("Document successfully updated!");
+            getToDos()
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+        // const toDoRef = doc(db, 'todos', item.id);
+        // setDoc(toDoRef, { completed: isChecked }, { merge: true });
+      };
     
 
     const showToDoList = () => {
@@ -141,7 +157,7 @@ export default function ToDo({navigation}){
                 unfillColor="#FFFFFF"
                 text={item.text}
                 iconStyle={{ borderColor: "#258ea6" }}
-                onPress={(isChecked) => { checkToDoItem(item, isChecked)}}
+                onPress={(isChecked) => { checkToDoItem(item.id, item, isChecked)}}
               />
             </View>
             <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item.id)} />
