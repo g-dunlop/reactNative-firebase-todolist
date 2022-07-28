@@ -23,6 +23,12 @@ export default StyleSheet.create({
       justifyContent:'center',
       marginBottom:16,
     },
+    rightAligned:{
+      justifyContent:"flex-end",
+    },
+    rightMargin:{
+      marginRight:4,
+    },
     lightText:{
       color:'white',
       fontSize:16,
@@ -45,7 +51,6 @@ export default StyleSheet.create({
     inlineTextButton:{
       color: '#b2d8d8',
       fontSize:20,
-   
     },
     pressedInlineTextButton:{
       color: '#b2d8d8',
