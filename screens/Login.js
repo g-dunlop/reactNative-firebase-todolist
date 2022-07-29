@@ -15,7 +15,7 @@ export default function Login({navigation}) {
   useEffect (()=> {
     const unsubscribe = auth.onAuthStateChanged(user => {
         if (user){
-            navigation.replace("ToDo")
+            navigation.replace("ToDoLists")
         }
     })
     return unsubscribe

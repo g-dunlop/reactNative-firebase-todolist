@@ -27,7 +27,7 @@ export default function SignUp({navigation}) {
   useEffect (()=> {
       const unsubscribe = auth.onAuthStateChanged(user => {
           if (user){
-              navigation.navigate("ToDo")
+              navigation.navigate("ToDoLists")
           }
       })
       return unsubscribe
