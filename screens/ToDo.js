@@ -5,6 +5,7 @@ import React, {useState, useEffect} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
 import AddToDoModal from '../components/AddToDoModal';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import GetServices from '../services/GetServices';
 
 
 export default function ToDo({navigation}){
@@ -13,11 +14,6 @@ export default function ToDo({navigation}){
     const [toDos, setToDos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
-
-    
-        
-        
-   
     
     const handleSignOut = () => {
         auth.signOut()
@@ -57,27 +53,9 @@ export default function ToDo({navigation}){
     }
 
     const addToDo = (todo) => {
-        let toDoToSave = {
-          text: todo,
-          completed: false,
-          userId: auth.currentUser.uid
-        };
-        // const docRef = await addDoc(collection(db, "todos"), toDoToSave);
-        db.collection("todos").add(toDoToSave)
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-            toDoToSave.id = docRef.id;
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
+        GetServices.createToDo(todo)
+            getToDos()
 
-        // toDoToSave.id = docRef.id;
-    
-        let updatedToDos = [...toDos];
-        updatedToDos.push(toDoToSave);
-    
-        setToDos(updatedToDos);
       };
 
     const getToDos = () => {
@@ -96,27 +74,16 @@ export default function ToDo({navigation}){
             setIsLoading(false)
             setIsRefreshing(false)
         };
+
     useEffect(() => {
         if (isLoading){
             getToDos()
         }
     }, [toDos])
     
-    let checkToDoItem = (id, item, isChecked) => {
-        const toDoRef = db.collection("todos").doc(id)
-        return toDoRef.update({
-            completed:!item.completed
-        })
-        .then(() => {
-            console.log("Document successfully updated!");
-            getToDos()
-        })
-        .catch((error) => {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-        // const toDoRef = doc(db, 'todos', item.id);
-        // setDoc(toDoRef, { completed: isChecked }, { merge: true });
+    const checkToDoItem = (id, item, isChecked) => {
+        GetServices.updateCheckBox(id, item, isChecked)
+        getToDos()
       };
     
 
@@ -135,13 +102,7 @@ export default function ToDo({navigation}){
       };
 
     const deleteToDo = (id) => {
-        db.collection("todos").doc(id).delete()
-        .then(() => {
-            console.log("Item deleted")
-        })
-        .catch((error) => {
-            console.log(error.message)
-        })
+        GetServices.deleteItem(id)
         let updatedToDos = [...toDos].filter((item) => item.id != id);
         setToDos(updatedToDos)
     }
