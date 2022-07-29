@@ -5,13 +5,14 @@ const ToDoListsServices = {
     createToDoList (todoList) {
         let toDoToSave = {
             text: todoList,
+            tasks:[],
             userId: auth.currentUser.uid
           };
          db.collection("todolists").add(toDoToSave)
          .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
             toDoToSave.id = docRef.id;
-            console.log(toDoToSave) 
+            // console.log(toDoToSave) 
         })
         .catch((error) => {
             console.error("Error adding document: ", error);

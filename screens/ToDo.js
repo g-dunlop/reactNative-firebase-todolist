@@ -8,20 +8,33 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import GetServices from '../services/GetServices';
 
 
-export default function ToDo({navigation}){
+export default function ToDo({route, navigation}){
+
+    const [list, setList] = useState(route.params)
+    const [listItems, setListItems] = useState([])
 
     const [modalVisible, setModalVisible] = useState(false);
     const [toDos, setToDos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
-    const handleSignOut = () => {
-        auth.signOut()
-        .then(() => {
-            navigation.replace("Login")
-        })
-        .catch((error) => {
-            alert(error.message);
+    const getToDos = () => {
+        let tempTasks=[]
+        db.collection("todolists").where("userId", "==", auth.currentUser.uid).get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if(list.id === doc.id){
+                    let activeList = doc.data()
+                    // console.log(activeList)
+                    if(activeList.tasks.length>0){
+                        activeList.tasks.forEach((thing) => {
+                        tempTasks.push(thing)
+                    }) 
+                }
+                }
+            });
+            setToDos(tempTasks)
+            setIsLoading(false)
         })
     }
 
@@ -33,47 +46,18 @@ export default function ToDo({navigation}){
             </View>
         )
     }
+
+    // const addToDo = (todo) => {
+    //     GetServices.createToDo(todo)
+    //         getToDos()
+
+    //   };
+
     
-
-    const showSendVerificationEmail = () => {
-        return(
-            <View>
-                <Text>Please verify your email to use ToDoList</Text>
-                <TouchableOpacity 
-                    onPress = {verifyEmail}
-                    style={Styles.logoutButton}>
-                    <Text style={Styles.logoutButtonText}>Send Verification</Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
-
-    const verifyEmail = () => {
-        auth.currentUser.sendEmailVerification()
-    }
-
-    const addToDo = (todo) => {
-        GetServices.createToDo(todo)
-            getToDos()
-
-      };
-
-    const getToDos = () => {
-        let toDos=[];
-        db.collection("todos").where("userId", "==", auth.currentUser.uid).get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                let toDo = doc.data();
-                toDo.id = doc.id;
-                toDos.push(toDo);
-                console.log(toDo);
-            });
-            setToDos(toDos)
-        });
             
-            setIsLoading(false)
-            setIsRefreshing(false)
-        };
+        //     setIsLoading(false)
+        //     setIsRefreshing(false)
+        // };
 
     useEffect(() => {
         if (isLoading){
@@ -81,10 +65,10 @@ export default function ToDo({navigation}){
         }
     }, [toDos])
     
-    const checkToDoItem = (id, item, isChecked) => {
-        GetServices.updateCheckBox(id, item, isChecked)
-        getToDos()
-      };
+    // const checkToDoItem = (id, item, isChecked) => {
+    //     GetServices.updateCheckBox(id, item, isChecked)
+    //     getToDos()
+    //   };
     
 
     const showToDoList = () => {
@@ -101,26 +85,16 @@ export default function ToDo({navigation}){
         )
       };
 
-    const deleteToDo = (id) => {
-        GetServices.deleteItem(id)
-        let updatedToDos = [...toDos].filter((item) => item.id != id);
-        setToDos(updatedToDos)
-    }
+    // const deleteToDo = (id) => {
+    //     GetServices.deleteItem(id)
+    //     let updatedToDos = [...toDos].filter((item) => item.id != id);
+    //     setToDos(updatedToDos)
+    // }
 
       const renderToDoItem = ({item}) => {
         return (
           <View style={[Styles.rowContainer, Styles.rightMargin, Styles.leftMargin]}>
-            <View style={Styles.fillSpace}>
-              <BouncyCheckbox
-                isChecked={item.completed}
-                size={25}
-                fillColor="#258ea6"
-                unfillColor="#FFFFFF"
-                text={item.text}
-                iconStyle={{ borderColor: "#258ea6" }}
-                onPress={(isChecked) => { checkToDoItem(item.id, item, isChecked)}}
-              />
-            </View>
+            <Text>{item.name}</Text>
             <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item.id)} />
           </View>
         );
@@ -129,10 +103,11 @@ export default function ToDo({navigation}){
 
     return(
         <View style={Styles.container}>
+            <Text>{list.text}</Text>
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" />
             </View>
-            <Text style={Styles.header}>To Do</Text>
+            {/* <Text style={Styles.header}>{list.text}</Text>
                     <Modal 
                     animationType="slide"
                     transparent={true}
@@ -140,15 +115,11 @@ export default function ToDo({navigation}){
                     onRequestClose={() => setModalVisible(false)}
                     >
                     <AddToDoModal onClose={() => setModalVisible(false)} addToDo={addToDo}/>
-                    </Modal>
-            <Text>{auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}</Text>
-            <TouchableOpacity 
-                onPress = {handleSignOut}
-                style={Styles.logoutButton}>
-                <Text style={Styles.logoutButtonText}>Log Out</Text>
-            </TouchableOpacity>
+                    </Modal> */}
+            <Text>{showContent() }</Text>
+          
         </View>
 
 
     )
-}
+    }

@@ -4,7 +4,7 @@ import {auth, db} from '../firebaseConfig';
 import React, {useState, useEffect} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
 import AddToDoListModal from '../components/AddToDoListModal';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
+
 import ToDoListsServices from '../services/ToDoListsServices';
 
 
@@ -15,15 +15,15 @@ export default function ToDoLists({navigation}){
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
-    const handleSignOut = () => {
-        auth.signOut()
-        .then(() => {
-            navigation.replace("Login")
-        })
-        .catch((error) => {
-            alert(error.message);
-        })
-    }
+    // const handleSignOut = () => {
+    //     auth.signOut()
+    //     .then(() => {
+    //         navigation.replace("Login")
+    //     })
+    //     .catch((error) => {
+    //         alert(error.message);
+    //     })
+    // }
 
     const showContent = () => {
         return(
@@ -66,7 +66,7 @@ export default function ToDoLists({navigation}){
                 let toDoList = doc.data();
                 toDoList.id = doc.id;
                 toDoLists.push(toDoList);
-                console.log(toDoList);
+                
             });
             setToDoLists(toDoLists)
         });
@@ -110,9 +110,14 @@ export default function ToDoLists({navigation}){
       const renderToDoItem = ({item}) => {
         return (
           <View style={[Styles.rowContainer, Styles.rightMargin, Styles.leftMargin]}>
-            <View style={Styles.fillSpace}>
-                <Text>{item.text}</Text>
-            </View>
+            {/* <View style={Styles.fillSpace}> */}
+            <TouchableOpacity
+                onPress={()=> {navigation.navigate("ToDo" , item)}}
+                style ={Styles.loginButton}
+            >
+                <Text style={Styles.leftAligned}>{item.text}</Text>
+            </TouchableOpacity>
+            {/* </View> */}
           </View>
         );
       }  
@@ -133,11 +138,11 @@ export default function ToDoLists({navigation}){
                     <AddToDoListModal onClose={() => setModalVisible(false)} addToDoList={addToDoList}/>
                     </Modal>
             <Text>{auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}</Text>
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
                 onPress = {handleSignOut}
                 style={Styles.logoutButton}>
                 <Text style={Styles.logoutButtonText}>Log Out</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
 
 

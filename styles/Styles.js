@@ -26,6 +26,9 @@ export default StyleSheet.create({
     rightAligned:{
       justifyContent:"flex-end",
     },
+    leftAligned:{
+      justifyContent:"flex-start",
+    },
     rightMargin:{
       marginRight:4,
     },
