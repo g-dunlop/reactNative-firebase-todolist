@@ -31,10 +31,10 @@ const GetServices = {
         })
     },
 
-    updateCheckBox (id, item, isChecked) {
-        const toDoRef = db.collection("todolists").doc(id)
+    updateCheckBox (updatedList, isChecked, list) {
+        const toDoRef = db.collection("todolists").doc(list.id)
         return toDoRef.update({
-            completed:!item.completed
+            tasks:updatedList
         })
         .then(() => {
             console.log("Document successfully updated!");

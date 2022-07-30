@@ -6,6 +6,8 @@ import InlineTextButton from '../components/InlineTextButton';
 import AddToDoModal from '../components/AddToDoModal';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import GetServices from '../services/GetServices';
+import uuid from 'react-native-uuid';
+
 
 
 export default function ToDo({route, navigation}){
@@ -49,7 +51,9 @@ export default function ToDo({route, navigation}){
     }
 
     const addToDo = (todo) => {
+        let id = uuid.v4();
         let toDoToAdd = {
+            id: id, // ⇨ '11edc52b-2918-4d71-9058-f7285e29d894',
             completed:false,
             name:todo,
         }
@@ -59,8 +63,6 @@ export default function ToDo({route, navigation}){
         setToDos(upDatedTasks)
         let thisList = list
         GetServices.createToDo(upDatedTasks, thisList)
-            // getToDos()
-
       };
 
     
@@ -75,8 +77,17 @@ export default function ToDo({route, navigation}){
         }
     }, [toDos])
     
-    const checkToDoItem = (id, item, isChecked) => {
-        GetServices.updateCheckBox(id, item, isChecked)
+    const checkToDoItem = (id, isChecked) => {
+        const thisList = list
+        let updatedList = [...toDos]
+        updatedList.forEach((task)=> {
+            if (task.id === id){
+                task.completed = isChecked
+            }
+        })
+        console.log(updatedList)
+        
+        GetServices.updateCheckBox(updatedList, isChecked, thisList)
         getToDos()
       };
     
@@ -91,7 +102,7 @@ export default function ToDo({route, navigation}){
               setIsRefreshing(true);
             }}
             renderItem={renderToDoItem}
-            keyExtractor={item => item.id} />
+            keyExtractor={item=> item.id} />
         )
       };
 
@@ -116,7 +127,7 @@ export default function ToDo({route, navigation}){
                       unfillColor="#FFFFFF"
                       text={item.name}
                       iconStyle={{ borderColor: "#258ea6" }}
-                      onPress={(isChecked) => { checkToDoItem(item, isChecked)}}
+                      onPress={(isChecked) => { checkToDoItem(item.id, isChecked)}}
                     />
                   </View>
                   <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item)} />
