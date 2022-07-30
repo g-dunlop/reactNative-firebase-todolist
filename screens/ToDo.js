@@ -53,15 +53,13 @@ export default function ToDo({route, navigation}){
             completed:false,
             name:todo,
         }
-
-        
         let upDatedTasks = [...toDos]
         upDatedTasks.push(toDoToAdd)
 
         setToDos(upDatedTasks)
         let thisList = list
         GetServices.createToDo(upDatedTasks, thisList)
-            getToDos()
+            // getToDos()
 
       };
 
@@ -97,11 +95,14 @@ export default function ToDo({route, navigation}){
         )
       };
 
-    // const deleteToDo = (id) => {
-    //     GetServices.deleteItem(id)
-    //     let updatedToDos = [...toDos].filter((item) => item.id != id);
-    //     setToDos(updatedToDos)
-    // }
+    const deleteToDo = (item) => {
+        const thisList = list
+        
+        let updatedToDos = [...toDos].filter((task) => task.name != item.name);
+        setToDos(updatedToDos)
+        GetServices.deleteItem(updatedToDos, list)
+        
+    }
 
       const renderToDoItem = ({item}) => {
         
@@ -118,7 +119,7 @@ export default function ToDo({route, navigation}){
                       onPress={(isChecked) => { checkToDoItem(item, isChecked)}}
                     />
                   </View>
-                  <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item.id)} />
+                  <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item)} />
                 </View>
               );
         
