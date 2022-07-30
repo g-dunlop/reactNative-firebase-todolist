@@ -2,33 +2,49 @@ import { auth, db } from "../firebaseConfig";
 
 const GetServices = {
 
-    createToDo (todo) {
-        let toDoToSave = {
-            text: todo,
-            completed: false,
-            userId: auth.currentUser.uid
-          };
-         db.collection("todos").add(toDoToSave)
-         .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-            toDoToSave.id = docRef.id;
-            console.log(toDoToSave) 
+    createToDo (todo, list) {
+        console.log(todo)
+        console.log(list.id)
+
+        const toDoRef = db.collection("todolists").doc(list.id)
+        return toDoRef.update({
+            tasks:todo
         })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
-        
-    },
-    deleteItem(id) {
-        db.collection("todos").doc(id).delete()
         .then(() => {
-            console.log("Item deleted")
+            console.log("Document successfully updated!");
         })
         .catch((error) => {
-            console.log(error.message)
-        })
+            console.error("Error updating document: ", error);
+        });
     },
-    updateCheckBox(id, item, isChecked){
+        // let toDoToSave = {
+        //     name: todo,
+        //     completed: false,
+        //     listId: auth.currentUser.uid
+        //   };
+        //  db.collection("todos").add(toDoToSave)
+        //  .then((docRef) => {
+        //     console.log("Document written with ID: ", docRef.id);
+        //     toDoToSave.id = docRef.id;
+        //     console.log(toDoToSave) 
+        // })
+        // .catch((error) => {
+        //     console.error("Error adding document: ", error);
+        // });
+        
+    
+
+    // deleteItem(id) {
+    //     db.collection("todos").doc(id).delete()
+    //     .then(() => {
+    //         console.log("Item deleted")
+    //     })
+    //     .catch((error) => {
+    //         console.log(error.message)
+    //     })
+    // },
+
+    updateCheckBox (id, item, isChecked) {
         const toDoRef = db.collection("todos").doc(id)
         return toDoRef.update({
             completed:!item.completed

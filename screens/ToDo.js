@@ -11,10 +11,10 @@ import GetServices from '../services/GetServices';
 export default function ToDo({route, navigation}){
 
     const [list, setList] = useState(route.params)
-    const [listItems, setListItems] = useState([])
+    const [toDos, setToDos] = useState([]);
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [toDos, setToDos] = useState([]);
+  
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
@@ -34,6 +34,7 @@ export default function ToDo({route, navigation}){
                 }
             });
             setToDos(tempTasks)
+            console.log(toDos)
             setIsLoading(false)
         })
     }
@@ -47,11 +48,22 @@ export default function ToDo({route, navigation}){
         )
     }
 
-    // const addToDo = (todo) => {
-    //     GetServices.createToDo(todo)
-    //         getToDos()
+    const addToDo = (todo) => {
+        let toDoToAdd = {
+            completed:false,
+            name:todo,
+        }
 
-    //   };
+        
+        let upDatedTasks = [...toDos]
+        upDatedTasks.push(toDoToAdd)
+
+        setToDos(upDatedTasks)
+        let thisList = list
+        GetServices.createToDo(upDatedTasks, thisList)
+            getToDos()
+
+      };
 
     
             
@@ -65,10 +77,10 @@ export default function ToDo({route, navigation}){
         }
     }, [toDos])
     
-    // const checkToDoItem = (id, item, isChecked) => {
-    //     GetServices.updateCheckBox(id, item, isChecked)
-    //     getToDos()
-    //   };
+    const checkToDoItem = (id, item, isChecked) => {
+        GetServices.updateCheckBox(id, item, isChecked)
+        getToDos()
+      };
     
 
     const showToDoList = () => {
@@ -92,12 +104,24 @@ export default function ToDo({route, navigation}){
     // }
 
       const renderToDoItem = ({item}) => {
-        return (
-          <View style={[Styles.rowContainer, Styles.rightMargin, Styles.leftMargin]}>
-            <Text>{item.name}</Text>
-            <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item.id)} />
-          </View>
-        );
+        
+            return (
+                <View style={[Styles.rowContainer, Styles.rightMargin, Styles.leftMargin]}>
+                  <View style={Styles.fillSpace}>
+                    <BouncyCheckbox
+                      isChecked={item.completed}
+                      size={25}
+                      fillColor="#258ea6"
+                      unfillColor="#FFFFFF"
+                      text={item.name}
+                      iconStyle={{ borderColor: "#258ea6" }}
+                      onPress={(isChecked) => { checkToDoItem(item, isChecked)}}
+                    />
+                  </View>
+                  <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item.id)} />
+                </View>
+              );
+        
       }  
 
 
@@ -107,15 +131,15 @@ export default function ToDo({route, navigation}){
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" />
             </View>
-            {/* <Text style={Styles.header}>{list.text}</Text>
+            <Text style={Styles.header}>{list.text}</Text>
                     <Modal 
                     animationType="slide"
                     transparent={true}
                     visible={modalVisible}
                     onRequestClose={() => setModalVisible(false)}
                     >
-                    <AddToDoModal onClose={() => setModalVisible(false)} addToDo={addToDo}/>
-                    </Modal> */}
+                    <AddToDoModal onClose={() => setModalVisible(false)} addToDo={addToDo} list={list}/>
+                    </Modal>
             <Text>{showContent() }</Text>
           
         </View>
