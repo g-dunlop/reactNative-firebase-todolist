@@ -15,15 +15,7 @@ export default function ToDoLists({navigation}){
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
-    // const handleSignOut = () => {
-    //     auth.signOut()
-    //     .then(() => {
-    //         navigation.replace("Login")
-    //     })
-    //     .catch((error) => {
-    //         alert(error.message);
-    //     })
-    // }
+    
 
     const showContent = () => {
         return(
@@ -126,7 +118,7 @@ export default function ToDoLists({navigation}){
     return(
         <View style={Styles.container}>
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
-                <InlineTextButton text="Manage Account" color="#258ea6" />
+                <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")} />
             </View>
             <Text style={Styles.header}>My ToDo Lists</Text>
                     <Modal 
@@ -138,11 +130,7 @@ export default function ToDoLists({navigation}){
                     <AddToDoListModal onClose={() => setModalVisible(false)} addToDoList={addToDoList}/>
                     </Modal>
             <Text>{auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}</Text>
-            {/* <TouchableOpacity 
-                onPress = {handleSignOut}
-                style={Styles.logoutButton}>
-                <Text style={Styles.logoutButtonText}>Log Out</Text>
-            </TouchableOpacity> */}
+           
         </View>
 
 

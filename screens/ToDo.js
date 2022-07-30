@@ -141,7 +141,7 @@ export default function ToDo({route, navigation}){
         <View style={Styles.container}>
             <Text>{list.text}</Text>
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
-                <InlineTextButton text="Manage Account" color="#258ea6" />
+                <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")}/>
             </View>
             <Text style={Styles.header}>{list.text}</Text>
                     <Modal 

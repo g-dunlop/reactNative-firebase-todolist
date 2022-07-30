@@ -1,5 +1,5 @@
 import { StyleSheet} from 'react-native';
-import { YellowBox } from 'react-native-web';
+
 
 export default StyleSheet.create({
     container: {
@@ -7,6 +7,12 @@ export default StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    loadingText:{
+      fontFamily: 'RockSalt',
+      fontSize:60,
+      color:'#10A5A5',
+      opacity:0.55,
     },
     backgroundCover:{
       alignSelf:'stretch',
@@ -41,10 +47,11 @@ export default StyleSheet.create({
     },
     header:{
       fontSize:32,
+      fontWeight:'bold',
     },
     textInput:{
       alignSelf:'stretch',
-      padding:10,
+      padding:12,
       borderBottomWidth:2,
       marginVertical:8,
     },
@@ -52,7 +59,7 @@ export default StyleSheet.create({
       borderBottomColor:'#ffffff',
     },
     inlineTextButton:{
-      color: '#b2d8d8',
+      color: '#b2d8ff',
       fontSize:20,
     },
     pressedInlineTextButton:{
@@ -66,8 +73,12 @@ export default StyleSheet.create({
      
     },
     loginButtonText:{
-      color:'yellow',
-      fontSize:26,
+      color:'#405343',
+      fontSize:20,
+      backgroundColor:'white',
+      paddingHorizontal:10,
+      paddingVertical: 5,
+      borderRadius:10,
     },
     logoutButton:{
       padding:5,
