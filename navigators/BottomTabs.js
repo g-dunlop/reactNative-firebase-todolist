@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator >
       <Tab.Screen 
         name="ToDoLists" 
         component={ToDoLists}

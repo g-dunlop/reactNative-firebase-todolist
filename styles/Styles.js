@@ -30,7 +30,7 @@ export default StyleSheet.create({
     flatListContainer:{
       backgroundColor:'pink',
       borderRadius:10,
-      // alignSelf:'stretch',
+      alignSelf:'stretch',
       flexDirection:'row',
       padding:10,
       
@@ -70,8 +70,10 @@ export default StyleSheet.create({
       flexDirection:'row',
       alignSelf:'stretch',
       alignItems:'center',
-      justifyContent:'center',
       marginBottom:16,
+    },
+    topRowContainer:{
+      justifyContent:'space-between',
     },
     rightAligned:{
       justifyContent:"flex-end",
@@ -95,6 +97,7 @@ export default StyleSheet.create({
     },
     header:{
       fontSize:30,
+      marginBottom:10,
       fontWeight:'bold',
       fontFamily:'Roboto',
       color:'#27ACAC',
@@ -139,5 +142,13 @@ export default StyleSheet.create({
       color:'red',
       fontSize:26,
     },
+    deleteItemButton:{
+      fontSize:10,
+
+    },
+    toDoItemText:{
+      fontSize:20,
+      fontFamily:'RockSalt',
+    }
     
 });

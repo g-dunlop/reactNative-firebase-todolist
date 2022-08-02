@@ -1,4 +1,4 @@
-import {View, Button, Text, TouchableOpacity, Modal, ActivityIndicator, FlatList} from 'react-native';
+import {View, Button, Text, TouchableOpacity, Modal, ActivityIndicator, ScrollView, FlatList, SafeAreaView} from 'react-native';
 import Styles from '../styles/Styles';
 import {auth, db} from '../firebaseConfig';
 import React, {useState, useEffect} from 'react';
@@ -7,6 +7,7 @@ import AddToDoModal from '../components/AddToDoModal';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import GetServices from '../services/GetServices';
 import uuid from 'react-native-uuid';
+import ToDoListsServices from '../services/ToDoListsServices';
 
 
 
@@ -14,9 +15,7 @@ export default function ToDo({route, navigation}){
 
     const [list, setList] = useState(route.params)
     const [toDos, setToDos] = useState([]);
-
     const [modalVisible, setModalVisible] = useState(false);
-  
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
@@ -45,7 +44,11 @@ export default function ToDo({route, navigation}){
         return(
             <View style={Styles.container}>
                 {isLoading ? <ActivityIndicator size="large" /> : showToDoList() }
-                <Button title="Add ToDo" color="#fb4d3d" onPress={()=> setModalVisible(true) }/>
+                <TouchableOpacity 
+                    onPress = {()=> setModalVisible(true)}
+                    style={Styles.addButton}>
+                    <Text style={Styles.addButtonText}>+</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -95,6 +98,8 @@ export default function ToDo({route, navigation}){
     const showToDoList = () => {
         return (
           <FlatList
+            style={Styles.flatListContainer}
+            scrollEnabled={true}
             data={toDos}
             refreshing={isRefreshing}
             onRefresh={() => {
@@ -106,13 +111,18 @@ export default function ToDo({route, navigation}){
         )
       };
 
-    const deleteToDo = (item) => {
-        const thisList = list
+    // const deleteToDo = (item) => {
+    //     const thisList = list
         
-        let updatedToDos = [...toDos].filter((task) => task.name != item.name);
-        setToDos(updatedToDos)
-        GetServices.deleteItem(updatedToDos, list)
+    //     let updatedToDos = [...toDos].filter((task) => task.name != item.name);
+    //     setToDos(updatedToDos)
+    //     GetServices.deleteItem(updatedToDos, list)
         
+    // }
+
+    const deleteList = () => {
+        ToDoListsServices.deleteList(list.id)
+        navigation.navigate("ToDoLists", list)
     }
 
       const renderToDoItem = ({item}) => {
@@ -125,12 +135,14 @@ export default function ToDo({route, navigation}){
                       size={25}
                       fillColor="#258ea6"
                       unfillColor="#FFFFFF"
-                      text={item.name}
+                    //   text={item.name}
                       iconStyle={{ borderColor: "#258ea6" }}
                       onPress={(isChecked) => { checkToDoItem(item.id, isChecked)}}
                     />
+                    
                   </View>
-                  <InlineTextButton text="Delete" color="#258ea6" onPress={() => deleteToDo(item)} />
+                  <Text style={Styles.toDoItemText}>{item.name}</Text>
+                  {/* <InlineTextButton style={[Styles.deleteItemButton, Styles.rightAligned]} text="Delete" color="#258ea6" onPress={() => deleteToDo(item)} /> */}
                 </View>
               );
         
@@ -138,12 +150,16 @@ export default function ToDo({route, navigation}){
 
 
     return(
-        <View style={Styles.container}>
-            <Text>{list.text}</Text>
+        <SafeAreaView style={{flex:1, paddingTop:30, backgroundColor:'white'}}>
+           <View style={[Styles.rowContainer, Styles.topRowContainer]}>
+           <View style={[Styles.rowContainer, Styles.leftAlignedAligned, Styles.leftMargin]}>
+                <InlineTextButton text="Delete List" color="red" onPress={deleteList}/>
+            </View>
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")}/>
             </View>
-            <Text style={Styles.header}>{list.text}</Text>
+            </View>
+            
                     <Modal 
                     animationType="slide"
                     transparent={true}
@@ -152,9 +168,10 @@ export default function ToDo({route, navigation}){
                     >
                     <AddToDoModal onClose={() => setModalVisible(false)} addToDo={addToDo} list={list}/>
                     </Modal>
-            <Text>{showContent() }</Text>
+                    <Text style={[Styles.header, Styles.leftAligned]}>{list.text}</Text>
+                    <ScrollView>{showContent() }</ScrollView>
           
-        </View>
+        </SafeAreaView>
 
 
     )

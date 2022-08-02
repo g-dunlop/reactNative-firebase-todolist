@@ -11,14 +11,18 @@ import ToDoListsServices from '../services/ToDoListsServices';
 import { ScrollView } from 'react-native';
 
 
-export default function ToDoLists({navigation}){
+export default function ToDoLists({route, navigation}){
 
     const [modalVisible, setModalVisible] = useState(false);
     const [toDoLists, setToDoLists] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     
-    
+    useEffect(() => {
+        if (route.params !== null){
+            getToDoLists()
+        }
+    }, [route])
 
     const showContent = () => {
         return(
