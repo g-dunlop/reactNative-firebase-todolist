@@ -1,11 +1,14 @@
-import {View, Button, Text, TouchableOpacity, Modal, ActivityIndicator, FlatList} from 'react-native';
+import {View, Button, Text, TouchableOpacity, Modal, ActivityIndicator, FlatList, SafeAreaView} from 'react-native';
 import Styles from '../styles/Styles';
 import {auth, db} from '../firebaseConfig';
 import React, {useState, useEffect} from 'react';
 import InlineTextButton from '../components/InlineTextButton';
 import AddToDoListModal from '../components/AddToDoListModal';
 
+
+
 import ToDoListsServices from '../services/ToDoListsServices';
+import { ScrollView } from 'react-native';
 
 
 export default function ToDoLists({navigation}){
@@ -19,9 +22,15 @@ export default function ToDoLists({navigation}){
 
     const showContent = () => {
         return(
-            <View style={Styles.container}>
+            <View >
+                
                 {isLoading ? <ActivityIndicator size="large" /> : showToDoLists() }
-                <Button title="Add ToDo List" color="#fb4d3d" onPress={()=> setModalVisible(true) }/>
+                
+                <TouchableOpacity 
+                    onPress = {()=> setModalVisible(true)}
+                    style={Styles.addButton}>
+                    <Text style={Styles.addButtonText}>+</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -29,7 +38,7 @@ export default function ToDoLists({navigation}){
 
     const showSendVerificationEmail = () => {
         return(
-            <View>
+            <View >
                 <Text>Please verify your email to use ToDoList</Text>
                 <TouchableOpacity 
                     onPress = {verifyEmail}
@@ -81,7 +90,7 @@ export default function ToDoLists({navigation}){
 
     const showToDoLists = () => {
         return (
-          <FlatList
+          <FlatList style={Styles.flatListContainer}
             data={toDoLists}
             refreshing={isRefreshing}
             onRefresh={() => {
@@ -103,11 +112,12 @@ export default function ToDoLists({navigation}){
         return (
           <View style={[Styles.rowContainer, Styles.rightMargin, Styles.leftMargin]}>
             {/* <View style={Styles.fillSpace}> */}
+            
             <TouchableOpacity
                 onPress={()=> {navigation.navigate("ToDo" , item)}}
                 style ={Styles.loginButton}
             >
-                <Text style={Styles.leftAligned}>{item.text}</Text>
+                <Text style={[Styles.leftAligned, Styles.listText]}>{item.text}</Text>
             </TouchableOpacity>
             {/* </View> */}
           </View>
@@ -116,11 +126,13 @@ export default function ToDoLists({navigation}){
 
 
     return(
-        <View style={Styles.container}>
+       
+        <SafeAreaView >
+            <ScrollView>
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")} />
             </View>
-            <Text style={Styles.header}>My ToDo Lists</Text>
+            
                     <Modal 
                     animationType="slide"
                     transparent={true}
@@ -129,10 +141,13 @@ export default function ToDoLists({navigation}){
                     >
                     <AddToDoListModal onClose={() => setModalVisible(false)} addToDoList={addToDoList}/>
                     </Modal>
-            <Text>{auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}</Text>
-           
-        </View>
-
+                    <Text style={[Styles.rowContainer, Styles.leftAligned, Styles.header]}>My ToDo Lists</Text>
+            {auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}
+            </ScrollView>
+            
+        </SafeAreaView>
+    
+     
 
     )
 }

@@ -7,6 +7,49 @@ export default StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      
+    },
+    navContainer:{
+      position:'absolute',
+      flexDirection:'row',
+      justifyContent:'space-evenly',
+      alignItems:'center',
+      bottom:0,
+      width:'100%',
+      paddingVertical:10,
+      backgroundColor:'grey',
+    },
+    navButton:{
+      paddingHorizontal:20,
+      height:50,
+      backgroundColor:'white',
+      borderRadius:5,
+      justifyContent:'center',
+    },
+    
+    flatListContainer:{
+      backgroundColor:'pink',
+      borderRadius:10,
+      // alignSelf:'stretch',
+      flexDirection:'row',
+      padding:50,
+      margin:40,
+      maxHeight:400,
+      overflowY:'scroll',
+    },
+    addButton:{
+      borderRadius:100,
+      backgroundColor:"#63CCCC",
+      marginTop:10,
+      width:50,
+      height:50,
+      alignSelf:'center',
+    },
+    addButtonText:{
+      color:'white',
+      fontSize:35,
+      alignSelf:'center',
+      
     },
     loadingText:{
       fontFamily: 'RockSalt',
@@ -42,12 +85,17 @@ export default StyleSheet.create({
       color:'white',
       fontSize:16,
     },
+    listText:{
+      fontFamily: 'RockSalt',
+    },
     errorText:{
       color:'red',
     },
     header:{
-      fontSize:32,
+      fontSize:30,
       fontWeight:'bold',
+      fontFamily:'Roboto',
+      color:'#27ACAC',
     },
     textInput:{
       alignSelf:'stretch',

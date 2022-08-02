@@ -9,7 +9,9 @@ import ResetPassword from './screens/ResetPassword';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-
+import Styles from './styles/Styles';
+import {SafeAreaView, View} from 'react-native';
+import BottomTabs from './navigators/BottomTabs';
 
 
 
@@ -28,14 +30,22 @@ const Stack = createNativeStackNavigator();
   }
 
 
+
+
  
   return (
+  
     <NavigationContainer>
       <Stack.Navigator >
       <Stack.Screen
           name="Loading"
           component={Loading}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="BottomTabs"
+        component={BottomTabs}
+        options={{headerShown:false}}
         />
         <Stack.Screen
           name="Login"
@@ -52,25 +62,27 @@ const Stack = createNativeStackNavigator();
           component={ResetPassword}
           options={{headerShown: false}}
         />
-         <Stack.Screen
+         {/* <Stack.Screen
           name="ToDoLists"
           component={ToDoLists}
           options={{headerShown: false}}
-        />
+        /> */}
         <Stack.Screen
           name="ToDo"
           component={ToDo}
           options={{headerShown: false}}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="ManageAccount"
           component={ManageAccount}
           options={{headerShown: false}}
-        />
+        /> */}
+        
       </Stack.Navigator>
-
+      
     </NavigationContainer>
    
+    
   );
 }
 ;
