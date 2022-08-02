@@ -32,15 +32,16 @@ export default StyleSheet.create({
       borderRadius:10,
       // alignSelf:'stretch',
       flexDirection:'row',
-      padding:50,
-      margin:40,
-      maxHeight:400,
-      overflowY:'scroll',
+      padding:10,
+      
+      marginHorizontal:20,
+      // maxHeight:400,
+      
     },
     addButton:{
       borderRadius:100,
       backgroundColor:"#63CCCC",
-      marginTop:10,
+      marginVertical:20,
       width:50,
       height:50,
       alignSelf:'center',
@@ -77,6 +78,7 @@ export default StyleSheet.create({
     },
     leftAligned:{
       justifyContent:"flex-start",
+      paddingLeft:20,
     },
     rightMargin:{
       marginRight:4,

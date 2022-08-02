@@ -90,7 +90,9 @@ export default function ToDoLists({navigation}){
 
     const showToDoLists = () => {
         return (
-          <FlatList style={Styles.flatListContainer}
+          <FlatList 
+            style={Styles.flatListContainer}
+            scrollEnabled={true}
             data={toDoLists}
             refreshing={isRefreshing}
             onRefresh={() => {
@@ -127,8 +129,8 @@ export default function ToDoLists({navigation}){
 
     return(
        
-        <SafeAreaView >
-            <ScrollView>
+        <SafeAreaView style={{flex:1, paddingTop:30, backgroundColor:'white'}}>
+            
             <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")} />
             </View>
@@ -141,10 +143,12 @@ export default function ToDoLists({navigation}){
                     >
                     <AddToDoListModal onClose={() => setModalVisible(false)} addToDoList={addToDoList}/>
                     </Modal>
+                    
                     <Text style={[Styles.rowContainer, Styles.leftAligned, Styles.header]}>My ToDo Lists</Text>
-            {auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}
-            </ScrollView>
-            
+                    <ScrollView>
+                        {auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}
+                    </ScrollView>
+
         </SafeAreaView>
     
      
