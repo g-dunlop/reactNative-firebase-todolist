@@ -9,28 +9,23 @@
     <td>
       <img width="206" alt="Loading" src="https://user-images.githubusercontent.com/88304522/183431987-f23e99b0-ba10-4174-a892-afece88b2ea8.PNG">
     </td>
-     <td><img width="207" alt="Sign up" src="https://user-images.githubusercontent.com/88304522/183432217-40654ee1-722b-4dc6-acab-90e6e1f93244.PNG">
-
-     
+     <td>
+       <img width="207" alt="Sign up" src="https://user-images.githubusercontent.com/88304522/183432217-40654ee1-722b-4dc6-acab-90e6e1f93244.PNG">
     </td>
-     <td><img width="206" alt="Login" src="https://user-images.githubusercontent.com/88304522/183432279-dfea59ee-f9cd-4896-b90f-25a3a134a1d4.PNG">
-
-    
+     <td>
+       <img width="206" alt="Login" src="https://user-images.githubusercontent.com/88304522/183432279-dfea59ee-f9cd-4896-b90f-25a3a134a1d4.PNG">
     </td>
    </tr>
     
    <tr>
-     <td><img width="205" alt="ToDoLists" src="https://user-images.githubusercontent.com/88304522/183432336-06eefae6-2841-451d-bb74-c558fde39bab.PNG">
-
-       
+     <td>
+       <img width="205" alt="ToDoLists" src="https://user-images.githubusercontent.com/88304522/183432336-06eefae6-2841-451d-bb74-c558fde39bab.PNG">
     </td>
-    <td><img width="205" alt="ToDoList" src="https://user-images.githubusercontent.com/88304522/183432361-ec900599-1c7d-405c-91a4-6ab30d1bada6.PNG">
-
-       
+    <td>
+      <img width="205" alt="ToDoList" src="https://user-images.githubusercontent.com/88304522/183432361-ec900599-1c7d-405c-91a4-6ab30d1bada6.PNG">
     </td>
-    <td><img width="206" alt="AddToDo" src="https://user-images.githubusercontent.com/88304522/183432387-3a59a282-3a8a-4cbe-9f9b-0ad03ebafa09.PNG">
-
-      
+    <td>
+      <img width="206" alt="AddToDo" src="https://user-images.githubusercontent.com/88304522/183432387-3a59a282-3a8a-4cbe-9f9b-0ad03ebafa09.PNG">
     </td>
    </tr>
   </table>
