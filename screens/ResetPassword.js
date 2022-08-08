@@ -32,7 +32,7 @@ export default function ResetPassword({navigation}) {
   return (
     <ImageBackground style={Styles.container} source={localImage}>
       <KeyboardAvoidingView style={Styles.backgroundCover} behaviour = {Platform.OS === "ios" ? "padding" : "height"}>
-        <Text style={[Styles.lightText, Styles.header]}>Reset Password</Text>
+        <Text style={[Styles.lightText, Styles.loginHeader]}>Reset Password</Text>
         <Text style={Styles.errorText}></Text>
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Email" value={email} onChangeText={(text)=> setEmail(text)} placeholderTextColor={'#ECECEC'}/>
         

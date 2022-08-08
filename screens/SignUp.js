@@ -58,7 +58,7 @@ export default function SignUp({navigation}) {
   return (
     <ImageBackground style={Styles.container} source={localImage}>
       <KeyboardAvoidingView style={Styles.backgroundCover} behaviour = {Platform.OS === "ios" ? "padding" : "height"}>
-        <Text style={[Styles.lightText, Styles.header]}>Sign Up</Text>
+        <Text style={[Styles.lightText, Styles.loginHeader]}>Sign Up</Text>
         <Text style={Styles.errorText}>{validationMessage}</Text>
 
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Email" value={email} onChangeText={setEmail} placeholderTextColor={'#ECECEC'}/>

@@ -50,13 +50,19 @@ export default StyleSheet.create({
       color:'white',
       fontSize:35,
       alignSelf:'center',
-      
     },
     loadingText:{
       fontFamily: 'RockSalt',
       fontSize:60,
       color:'#10A5A5',
       opacity:0.55,
+    },
+    loadingRowContainer:{
+      flexDirection:'row',
+      alignSelf:'stretch',
+      alignItems:'center',
+      justifyContent:'center',
+      marginBottom:16,
     },
     backgroundCover:{
       alignSelf:'stretch',
@@ -101,6 +107,13 @@ export default StyleSheet.create({
       fontWeight:'bold',
       fontFamily:'Roboto',
       color:'#27ACAC',
+    },
+    loginHeader:{
+      fontSize:30,
+      marginBottom:10,
+      fontWeight:'bold',
+      fontFamily:'Roboto',
+      color:'white',
     },
     textInput:{
       alignSelf:'stretch',

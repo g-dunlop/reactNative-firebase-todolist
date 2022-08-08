@@ -37,7 +37,7 @@ export default function Login({navigation}) {
   return (
     <ImageBackground style={Styles.container} source={localImage}>
       <KeyboardAvoidingView style={Styles.backgroundCover} behaviour = {Platform.OS === "ios" ? "padding" : "height"}>
-        <Text style={[Styles.lightText, Styles.header]}>Login</Text>
+        <Text style={[Styles.lightText, Styles.loginHeader]}>Login</Text>
         <Text style={Styles.errorText}>{errorMessage}</Text>
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Email" value={email} onChangeText={(text)=> setEmail(text)} placeholderTextColor={'#ECECEC'}/>
         <TextInput style={[Styles.lightText, Styles.lightTextInput, Styles.textInput]} placeholder="Password" value={password} onChangeText={(text) => setPassword(text)} placeholderTextColor={'#ECECEC'} secureTextEntry/>

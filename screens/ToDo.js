@@ -122,7 +122,7 @@ export default function ToDo({route, navigation}){
 
     const deleteList = () => {
         ToDoListsServices.deleteList(list.id)
-        navigation.navigate("ToDoLists", list)
+        navigation.navigate("Lists", list)
     }
 
       const renderToDoItem = ({item}) => {

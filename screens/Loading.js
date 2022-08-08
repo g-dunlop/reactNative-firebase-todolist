@@ -24,7 +24,7 @@ export default function Loading({navigation}) {
     <ImageBackground style={Styles.container} source={localImage}>
      
 
-        <View style={Styles.rowContainer}>
+        <View style={Styles.loadingRowContainer}>
           <Text style={Styles.loadingText}>ToDo </Text>
         </View>
       
