@@ -10,7 +10,7 @@
       <img width="958" alt="tf_1" src="https://user-images.githubusercontent.com/88304522/175780127-6392aad8-4916-49dc-97c8-3859cc746c5d.PNG">
     </td>
     <td>
-       <img width="959" alt="tf_2" src="https://user-images.githubusercontent.com/88304522/175780140-2bfb45de-6a43-49e7-ac79-f150f2638f5a.PNG">
+      <img width="206" alt="Loading" src="https://user-images.githubusercontent.com/88304522/183431987-f23e99b0-ba10-4174-a892-afece88b2ea8.PNG">
     </td>
      <td>
      <img width="956" alt="tf_3" src="https://user-images.githubusercontent.com/88304522/175780142-9303fa4f-56a2-4d9a-b2f6-ba117355f45e.PNG">
