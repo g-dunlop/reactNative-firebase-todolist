@@ -7,7 +7,6 @@ export default StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      
     },
     navContainer:{
       position:'absolute',
@@ -84,6 +83,9 @@ export default StyleSheet.create({
     rightAligned:{
       justifyContent:"flex-end",
     },
+    centerAligned:{
+      justifyContent:'center'
+    },
     leftAligned:{
       justifyContent:"flex-start",
       paddingLeft:20,
@@ -97,6 +99,7 @@ export default StyleSheet.create({
     },
     listText:{
       fontFamily: 'RockSalt',
+      fontSize:20,
     },
     errorText:{
       color:'red',
@@ -162,6 +165,17 @@ export default StyleSheet.create({
     toDoItemText:{
       fontSize:20,
       fontFamily:'RockSalt',
+    },
+    modalButton:{
+      backgroundColor:"#27ACAC",
+      
+      padding:5,
+      margin:1,
+      borderRadius:5,
+    },
+    modalButtonText:{
+      color:'white',
+      fontWeight:'bold',
     }
     
 });

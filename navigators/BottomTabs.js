@@ -14,6 +14,7 @@ export default function BottomTabs() {
     <Tab.Navigator
       initialRouteName="Lists"
       activeColor="white"
+      
       inactiveColor="#3e2465"
       barStyle={{ paddingVertical: 10, backgroundColor: '#10A5A5'}}
 

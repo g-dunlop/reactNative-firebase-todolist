@@ -49,6 +49,9 @@ export default function ToDo({route, navigation}){
                     style={Styles.addButton}>
                     <Text style={Styles.addButtonText}>+</Text>
                 </TouchableOpacity>
+                <View style={[Styles.rowContainer, Styles.centerAligned]}>
+                <InlineTextButton text="Delete List" color="red" onPress={deleteList}/>
+                </View>
             </View>
         )
     }
@@ -111,14 +114,7 @@ export default function ToDo({route, navigation}){
         )
       };
 
-    // const deleteToDo = (item) => {
-    //     const thisList = list
-        
-    //     let updatedToDos = [...toDos].filter((task) => task.name != item.name);
-    //     setToDos(updatedToDos)
-    //     GetServices.deleteItem(updatedToDos, list)
-        
-    // }
+  
 
     const deleteList = () => {
         ToDoListsServices.deleteList(list.id)
@@ -151,14 +147,14 @@ export default function ToDo({route, navigation}){
 
     return(
         <SafeAreaView style={{flex:1, paddingTop:30, backgroundColor:'white'}}>
-           <View style={[Styles.rowContainer, Styles.topRowContainer]}>
+           {/* <View style={[Styles.rowContainer, Styles.topRowContainer]}>
            <View style={[Styles.rowContainer, Styles.leftAlignedAligned, Styles.leftMargin]}>
                 <InlineTextButton text="Delete List" color="red" onPress={deleteList}/>
             </View>
-            <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
+            {/* <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")}/>
-            </View>
-            </View>
+            </View> */}
+            {/* </View> */} 
             
                     <Modal 
                     animationType="slide"
@@ -169,8 +165,10 @@ export default function ToDo({route, navigation}){
                     <AddToDoModal onClose={() => setModalVisible(false)} addToDo={addToDo} list={list}/>
                     </Modal>
                     <Text style={[Styles.header, Styles.leftAligned]}>{list.text}</Text>
-                    <ScrollView>{showContent() }</ScrollView>
-          
+                    {/* <ScrollView> */}
+                      {showContent() }
+                      {/* </ScrollView> */}
+                  
         </SafeAreaView>
 
 

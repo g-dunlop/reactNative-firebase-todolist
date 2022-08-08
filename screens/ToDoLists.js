@@ -135,9 +135,9 @@ export default function ToDoLists({route, navigation}){
        
         <SafeAreaView style={{flex:1, paddingTop:30, backgroundColor:'white'}}>
             
-            <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
+            {/* <View style={[Styles.rowContainer, Styles.rightAligned, Styles.rightMargin]}>
                 <InlineTextButton text="Manage Account" color="#258ea6" onPress={() => navigation.navigate("ManageAccount")} />
-            </View>
+            </View> */}
             
                     <Modal 
                     animationType="slide"
@@ -149,9 +149,9 @@ export default function ToDoLists({route, navigation}){
                     </Modal>
                     
                     <Text style={[Styles.rowContainer, Styles.leftAligned, Styles.header]}>My ToDo Lists</Text>
-                    <ScrollView>
+                    {/* <ScrollView> */}
                         {auth.currentUser.emailVerified ? showContent() : showSendVerificationEmail()}
-                    </ScrollView>
+                    {/* </ScrollView> */}
 
         </SafeAreaView>
     
