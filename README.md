@@ -61,24 +61,20 @@
  <h2>How to Run the App</h2>
   <ul>
     <li>Fork the repository and then clone it clone to local computer</li>
-    <li>Open the project in Intellij and start the server via the file 'TractorFinderApplication'.</li>
-    <li>You may need to change the path of the csv files we use to seed the database.  These can be found in 'components/DataLoader.js' on lines 63 and 87.</li>
-  <li>cd into the 'client folder'</li>
-  <li>npm install</li>
-  <li>npm start</li>
+    <li>npm install</li>
+    <li>expo start</li>
+    <li>from expo local host in the browser, you can choose how to run the app.  You can scan the QR qith your phone.  Run on an emulator (Android 11 API30) or in the web browser</li>
   </ul>
   
   <h2>What I learned</h2>
   <ul>
-    <li>We used the outdated version of React-Google-Maps, which led to have to use an older version of React.  This then led to compatibility issues with some other libraries.  I would read about the versions more carefully on a future app!<li>
-    <li>I've done the previous projects with vanilla CSS, and while it's been good to learn it and understand a little about making sites responsive, Bootsrap and other frameworks are more efficient and I will use them in future.  We choise Bootsrap over Material UI as I was more familiar with it, but I'll definitely give a different framework another go next time.</li>
-    <li>Libraries are extremely powerful and I need to always consider if there is a library for what I'm about to do(There usually is!).</li>
-    <li>Spring is very powerful!  I guess it's more Spring Boot that we used, but the ease with which you can generate SQL queries and access the data is something I'm looking forward to playing about with more.  My next project will have a more complex backend with more realtionships to navigate, and I'm sure Spring will help with that.</li>
-    <li>Learing how to get data from the csv files into our database took us a long time, but it was worth it in the end and I'm sure something we'll need to do again in the future</li>
+    <li>This was mostly a way of learning the different JSX components in React Native.  Much of React Native is the same in terms of passing props, using states etc.  However, I will be looking into Redux next before I start on bigger mobile apps.  It was also my first time using the Android Studio emulator with Expo and my first attempt at using Cloud services.  <li>
+    <li>Firebase is a lot more accessible for a junior developer in my opinion than AWS, which can be overwhelming to get started with.  Firebase is a great way to get Auth and a cloud database up and running quickly and the free limits are quite generous!</li>
+    <li>I'd heard about Figma so it was great to have a go at it.  Tutorials on how to configure preset fonts and colors as well as how to create components helped me a lot.</li>
+    <li>Styling in React Native proved a little tricky, especially when it involved flatlists and scroll views.</li>
   </ul>
   
   <h2>What I would do differently</h2>
   <ul>
-    <li>As mentioned above, I'd take more time before getting started to research different libraries and read about the versions.  It feels like it's time when you could have started coding but at worst I think you'll end up achieving the same amount but will likely have a better product than diving into the code. </li>
-    <li>There's always more if you had more time.  As a small team, we're OK with what we achieved as the brief for this app was somewhat limited.  If this was something that could be integrated with the auction site, and give us access to things such as the information for each specific tractor being sold, we could generate an automated inspector booking system.</li>
+    <li>I haven't gone to town on the UX of this app as it was mostly a short practice project so there's much that can be improved.  I will come back and add shared lists as soon as possible. </li>
   </ul>
