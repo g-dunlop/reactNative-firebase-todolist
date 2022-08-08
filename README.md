@@ -4,7 +4,7 @@
 
 <h2>Tools</h2>
 <ul>
-  <li>Figma design tools (see <a href="https://www.figma.com/file/VtdIdSTRVnJesQ4OQZmyf2/ToDoList?node-id=0%3A1" target="_blank">here)</a></li>
+  <li>Figma design tools (see <a href="https://www.figma.com/file/VtdIdSTRVnJesQ4OQZmyf2/ToDoList?node-id=0%3A1" target="_blank">here for the basic wireframe and prototype used.)</a></li>
   <li>React-Native for mobile development</li>
   <li>Firebase auth and firestore</li>
  </ul>
