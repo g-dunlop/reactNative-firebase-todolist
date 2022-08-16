@@ -1,6 +1,6 @@
 # reactNative-firebase-todolist
 <h2>About</h2>
-<p>This wis a project I've recently been working on.  Although the todo list is a well-trodden path, the project allowed me to have a go with and start learning a lot of tools I haven't used before.</p>
+<p>This is a project I've recently been working on.  Although the todo list is a well-trodden path, the project allowed me to have a go with and start learning a lot of tools I haven't used before.</p>
 
 <h2>Screenshots</h2>
   <p>For a short video preview of the app, please visit my  <a href="https://g-dunlop.github.io/g-dunlop-portfolio-website/">portfolio site</a>:
